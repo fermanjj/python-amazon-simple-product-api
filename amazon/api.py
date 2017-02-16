@@ -525,7 +525,11 @@ class AmazonSearch(object):
             An string representing an Amazon Associates tag.
         """
         self.kwargs = kwargs
-        self.current_page = 1
+        if 'ItemPage' in kwargs:
+            self.current_page = kwargs['ItemPage']
+            del kwargs['ItemPage']
+        else:
+            self.current_page = 1
         self.api = api
         self.aws_associate_tag = aws_associate_tag
 
